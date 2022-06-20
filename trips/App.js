@@ -12,3 +12,6 @@ export default function App() {
       </NavigationContainer>
   );
 }
+
+//<TripsList /> component ready to use
+//<TripCreator /> component ready to use
