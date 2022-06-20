@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
-import axios from "axios";
+
+import instance from "./instance";
 class TripStore {
   trips = [];
 
@@ -9,7 +10,7 @@ class TripStore {
 
   fetchTrips = async () => {
     try {
-      const response = await axios.get("http://172.20.10.2:8095/api/trips");
+      const response = await instance.get("/api/trips");
       this.trips = response.data;
     } catch (error) {
       console.log(error);
@@ -18,10 +19,7 @@ class TripStore {
 
   createTrip = async (trip) => {
     try {
-      const response = await axios.post(
-        "http://172.20.10.2:8095/api/trips/create",
-        trip
-      );
+      const response = await instance.post("/api/trips/create", trip);
 
       this.trips.push(response.data);
     } catch (error) {
