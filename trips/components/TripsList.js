@@ -19,7 +19,7 @@ function TripsList({ navigation: { navigate } }) {
           navigate("Trip-details", trip);
         }}
       >
-        <Card key={trip._id}>
+        <Card containerStyle={{backgroundColor:"#C6C9CC"}} key={trip._id}>
           <OneTripExplore trip={trip} />
         </Card>
       </TouchableOpacity>

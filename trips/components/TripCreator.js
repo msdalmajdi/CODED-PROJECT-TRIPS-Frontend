@@ -71,7 +71,7 @@ function TripCreator() {
               borderBottomWidth: 20,
             }}
           />
-          <Button color="#FF2400" title="Clear" onPress={handleClear} />
+          <Button color="#FF2400" title="Clear"  onPress={handleClear} />
         </View>
       </Card>
     </View>

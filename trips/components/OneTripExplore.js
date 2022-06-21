@@ -14,16 +14,19 @@ function OneTripExplore({ trip }) {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    flexDirection: "row",
+    // flexDirection: "row",
     alignItems: "center",
   },
   tripLogo: {
-    width: 75,
-    height: 75,
+    width: 370,
+    height: 500,
   },
   tripTitle: {
-    fontSize: 40,
-    marginHorizontal: 10,
+    fontSize: 28,
+    fontFamily: "Roboto",
+    fontWeight: "bold",
+    // marginHorizontal: 10,
+    marginTop: 10,
   },
 });
 export default observer(OneTripExplore);
