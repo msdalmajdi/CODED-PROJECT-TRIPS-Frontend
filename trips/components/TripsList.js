@@ -1,15 +1,28 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, SafeAreaView, ScrollView, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { observer } from "mobx-react";
 import tripStore from "../stores/tripStore";
 import { Card, ListItem, Button, Icon } from "react-native-elements";
 import OneTripExplore from "./OneTripExplore";
-function TripsList() {
+function TripsList({ navigation: { navigate } }) {
   const tripsList = tripStore.trips.map((trip) => {
     return (
-      <Card key={trip._id}>
-        <OneTripExplore trip={trip} />
-      </Card>
+      <TouchableOpacity
+        onPress={() => {
+          navigate("Trip-details", trip);
+        }}
+      >
+        <Card key={trip._id}>
+          <OneTripExplore trip={trip} />
+        </Card>
+      </TouchableOpacity>
     );
   });
   return (

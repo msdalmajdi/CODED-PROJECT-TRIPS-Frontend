@@ -12,16 +12,19 @@ import React from "react";
 import profileStore from "../stores/profileStore";
 
 export default function EditProfile() {
-  const [profile, setProfile] = React.useState({
-    image: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
-    bio: "",
-  });
-  //   const handleChange = (event) => {
-  //     setProfile({ ...profile, [event.target.name]: event.target.value });
-  //   };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    profileStore.updateProfile(profile);
+  const [bio, onChangeBio] = React.useState();
+  const [image, onChangeImage] = React.useState();
+  const profile = profileStore.getProfileById(user._id);
+
+  // const handleChange = (event) => {
+  //   setProfile({ ...profile, [event.target.name]: event.target.value });
+  // };
+  const handleSubmit = () => {
+    const update = { bio: bio, image: image };
+    if (image !== "") {
+      profile.image = image;
+    }
+    profileStore.updateProfile(update, profile._id);
   };
   return (
     <View style={{ backgroundColor: "white", height: "100%" }}>
@@ -46,7 +49,7 @@ export default function EditProfile() {
           placeholder="Image uri"
           name="image"
           autoCapitalize="none"
-          onChangeText={(img) => setProfile({ ...profile, image: img })}
+          onChangeText={{}}
         />
         <Text
           style={{
@@ -73,7 +76,7 @@ export default function EditProfile() {
           placeholder="Enter your bio"
           name="bio"
           autoCapitalize="none"
-          onChangeText={(biio) => setProfile({ ...profile, bio: biio })}
+          onChangeText={{}}
         />
         <TouchableOpacity
           onPress={() => {
@@ -94,8 +97,7 @@ export default function EditProfile() {
               textAlign: "center",
             }}
           >
-            {" "}
-            Update{" "}
+            Update
           </Text>
         </TouchableOpacity>
       </View>

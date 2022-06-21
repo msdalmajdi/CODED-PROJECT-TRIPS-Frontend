@@ -10,12 +10,15 @@ import {
 import React from "react";
 import profileStore from "../stores/profileStore";
 import { useNavigation } from "@react-navigation/native";
-import profi from "../profileData";
-export default function Profile() {
+import userStore from "../stores/userStore";
+import { observer } from "mobx-react";
+function Profile() {
   const navigation = useNavigation();
-  const profile = profileStore.profiles;
-  let p = profile[0];
-  console.log(p);
+  if (profileStore.isLoading) return <Text>Loading</Text>;
+  const user = userStore.user;
+  //console.log(user);
+  const profile = profileStore.getProfileById(user._id);
+  console.log(profile);
   return (
     <View style={{ backgroundColor: "white", height: "100%" }}>
       <View
@@ -33,7 +36,7 @@ export default function Profile() {
             borderRadius: 50,
           }}
           source={{
-            uri: p.image,
+            uri: profile.image,
           }}
         />
         <View>
@@ -70,7 +73,7 @@ export default function Profile() {
           marginBottom: 10,
         }}
       >
-        {p.user.username}
+        {profile.user.username}
       </Text>
 
       <Text
@@ -81,14 +84,16 @@ export default function Profile() {
           marginBottom: 20,
         }}
       >
-        {p.bio}
+        {profile.bio}
       </Text>
       <TouchableOpacity
         style={{
           alignItems: "center",
           padding: 10,
         }}
-        onPress={() => navigation.navigate("EditProfile")}
+        onPress={() => {
+          navigation.navigate("EditProfile");
+        }}
       >
         <Text
           style={{
@@ -110,6 +115,7 @@ export default function Profile() {
     </View>
   );
 }
+export default observer(Profile);
 const styles = StyleSheet.create({
   thumb: {
     height: 260,

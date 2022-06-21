@@ -17,6 +17,10 @@ class TripStore {
     }
   };
 
+  getTripById = (id) => {
+    return this.trips.find((trip) => trip._id === id);
+  };
+
   createTrip = async (trip) => {
     try {
       const response = await instance.post("/api/trips/create", trip);

@@ -6,11 +6,13 @@ class ProfileStore {
     makeAutoObservable(this);
   }
   profiles = [];
+  isLoading = true;
   fetchProfile = async () => {
     try {
       const response = await instance.get("/api/profile");
       this.profiles = response.data;
-      //rconsole.log(this.profiles);
+      this.isLoading = false;
+      console.log(this.profiles);
     } catch (error) {
       console.log("ProfileStore -> fetchProfile -> error", error);
     }
@@ -29,7 +31,11 @@ class ProfileStore {
       console.log("ProfileStore -> updateProfile -> error", error);
     }
   };
+  getProfileById(userId) {
+    return this.profiles.find((profile) => profile.user._id === userId);
+  }
 }
+
 const profileStore = new ProfileStore();
 profileStore.fetchProfile();
 export default profileStore;
