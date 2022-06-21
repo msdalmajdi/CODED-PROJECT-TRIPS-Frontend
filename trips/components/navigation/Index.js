@@ -9,41 +9,28 @@ import userStore from "./../../stores/userStore";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { observer } from "mobx-react";
 import tripStore from "../../stores/tripStore";
+import { Button } from 'react-native';
+
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
 function Index() {
   const navigation = useNavigation();
-  let isSignedIn = false;
-  if (userStore.user) isSignedIn = true;
   return (
     <Navigator
       initialRouteName="List"
-      screenOptions={{ headerTitleAlign: "center" }}
+      screenOptions={{ headerTitleAlign: "center", headerStyle:{backgroundColor: "#6FB6F6",},headerTitleStyle:{color:"white",   fontFamily: "Roboto",fontWeight:"bold"}, }}
     >
-      {isSignedIn ? (
-        <>
-          <Screen name="Hello" component={TripsList} />
+          <Screen name="Explore" component={TripsList} />
           <Screen
             name="Trip-details"
             options={({ route }) => {
               return {
                 title: tripStore.getTripById(route.params._id).title,
-              };
+              }
             }}
             component={TripDetails}
           />
-        </>
-      ) : (
-        <>
-          <Screen
-            name="Signin"
-            component={SignInPage}
-            options={{ headerShown: false }}
-          />
-          {/* <Screen name="Signup" component={SignUpPage} options={{headerShown: false}}  /> */}
-        </>
-      )}
     </Navigator>
   );
 }
