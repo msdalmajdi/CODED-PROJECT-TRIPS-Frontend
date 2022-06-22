@@ -4,7 +4,7 @@ import TripsList from "../TripsList";
 import { observer } from "mobx-react";
 import Index from "./Index";
 import { SignInPage } from "../user/SignInPage";
-import userStore from "./../../stores/userStore";
+import userStore from "../../stores/userStore";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Button, View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";

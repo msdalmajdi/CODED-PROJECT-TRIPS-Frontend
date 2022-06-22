@@ -12,20 +12,52 @@ import { Card, ListItem, Icon, Button } from "react-native-elements";
 
 import { observer } from "mobx-react";
 import tripStore from "../stores/tripStore";
-function TripDetails({ route }) {
+import user from "../stores/userStore";
+import { Divider } from "native-base";
+function TripDetails({ route, navigation: { navigate } }) {
   const trip = route.params;
-  console.log(trip.title);
+
+  const DeleteButton = () => {
+    if (user.user._id == trip.owner) {
+      return (
+        <View style={styles.tripButtons}>
+          <Button
+            title="Update"
+            style={{ marginHorizontal: 20 }}
+            onPress={() => {
+              navigate("Trip-update", trip._id);
+            }}
+          />
+          <Button
+            title="Delete"
+            style={{ marginHorizontal: 20 }}
+            onPress={() => {
+              tripStore.deleteTrip(trip._id);
+
+              navigate("Explore");
+            }}
+          />
+        </View>
+      );
+    } else {
+      return <></>;
+    }
+  };
   return (
     <SafeAreaView>
       <ScrollView>
         <View>
           <Card>
-            <Card.Title>HELLO WORLD</Card.Title>
+            <Card.Title>
+              <Text style={styles.tripTitle}>{trip.title}</Text>
+            </Card.Title>
             <Card.Divider />
             <View style={styles.tripContainer}>
               <Image style={styles.tripImage} source={{ uri: trip.image }} />
+              <Card.Divider />
               <Text style={styles.tripDescription}>{trip.description}</Text>
-              <Button title="VIEW NOW" />
+              <Card.Divider />
+              <DeleteButton />
             </View>
           </Card>
         </View>
@@ -38,11 +70,23 @@ const styles = StyleSheet.create({
     fontSize: 40,
     marginHorizontal: 10,
   },
-  tripContainer: {},
-  tripImage: {
-    width: 75,
-    height: 75,
+  tripContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  tripDescription: {},
+  tripImage: {
+    width: 340,
+    height: 500,
+  },
+  tripDescription: {
+    fontSize: 30,
+    marginHorizontal: 10,
+  },
+  tripButtons: {
+    padding: 10,
+    flexDirection: "row",
+    alignItems: "center",
+  },
 });
 export default observer(TripDetails);

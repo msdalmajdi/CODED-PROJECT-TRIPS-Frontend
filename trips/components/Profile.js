@@ -7,6 +7,7 @@ import {
   Alert,
   TouchableOpacity,
 } from "react-native";
+import { Divider } from "react-native-elements/dist/divider/Divider";
 import React from "react";
 import profileStore from "../stores/profileStore";
 import { useNavigation } from "@react-navigation/native";
@@ -48,8 +49,7 @@ function Profile() {
               fontWeight: "600",
             }}
           >
-            num
-            {/* {profileStore.getNumOfTrips(profile._id)} */}
+            {profileStore.getNumOfTrips(profile._id)}
           </Text>
           <Text
             style={{

@@ -5,12 +5,13 @@ import { SignInPage } from "../user/SignInPage";
 import { HelloWorldApp } from "../ph";
 import TripsList from "../TripsList";
 import TripDetails from "../TripDetails";
-import userStore from "./../../stores/userStore";
+import userStore from "../../stores/userStore";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { observer } from "mobx-react";
 import tripStore from "../../stores/tripStore";
 import { Button } from "react-native";
 import EditProfile from "../EditProfile";
+import TripEditor from "../TripEditor";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -41,6 +42,7 @@ function Index() {
         }}
         component={TripDetails}
       />
+      <Screen name="Trip-update" component={TripEditor} />
       <>
         <Screen
           name="Signin"

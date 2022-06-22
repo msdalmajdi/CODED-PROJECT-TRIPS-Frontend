@@ -12,7 +12,6 @@ class ProfileStore {
       const response = await instance.get("/api/profile");
       this.profiles = response.data;
       this.isLoading = false;
-      console.log(this.profiles);
     } catch (error) {
       console.log("ProfileStore -> fetchProfile -> error", error);
     }
@@ -24,16 +23,20 @@ class ProfileStore {
         `/api/profile/${profileId}`,
         updatedProfile
       );
-      this.profiles = this.profiles.map((profile) =>
-        profile._id === profileId ? res.data : profile
+      const updateProfile = Object.assign(
+        this.profiles.find((profile) => profile._id === profileId),
+        updatedProfile
       );
+      // this.profiles = this.profiles.map((profile) =>
+      //   profile._id === profileId ? res.data : profile
+      // );
     } catch (error) {
       console.log("ProfileStore -> updateProfile -> error", error);
     }
   };
-  getProfileById(userId) {
+  getProfileById = (userId) => {
     return this.profiles.find((profile) => profile.user._id === userId);
-  }
+  };
   getNumOfTrips(profileId) {
     const profile = this.profiles.find((profile) => profile._id === profileId);
     const numTrips = profile.user.trips.length;

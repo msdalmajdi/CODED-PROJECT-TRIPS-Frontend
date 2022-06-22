@@ -16,10 +16,12 @@ import { FlipInEasyX } from "react-native-reanimated";
 import { Divider } from "react-native-elements/dist/divider/Divider";
 
 import user from "../stores/userStore";
-function TripCreator({ navigation: { navigate } }) {
-  const [title, onChangeTitle] = useState("");
-  const [image, onChangeImage] = useState("");
-  const [description, onChangeDescription] = useState("");
+function TripEditor({ route, navigation: { navigate } }) {
+  console.log(route.params);
+  const editedTrip = tripStore.getTripById(route.params);
+  const [title, onChangeTitle] = useState(editedTrip.title);
+  const [image, onChangeImage] = useState(editedTrip.image);
+  const [description, onChangeDescription] = useState(editedTrip.description);
 
   const handleSubmit = () => {
     const send = {
@@ -30,7 +32,9 @@ function TripCreator({ navigation: { navigate } }) {
     if (image !== "") {
       send.image = image;
     }
-    tripStore.createTrip(send);
+    console.log(send);
+    console.log(editedTrip._id);
+    tripStore.updateTrip(editedTrip._id, send);
     handleClear();
     navigate("Explore");
   };
@@ -43,14 +47,14 @@ function TripCreator({ navigation: { navigate } }) {
   return (
     <View style={styles.container}>
       <Card>
-        <Card.Title>Create your Trip</Card.Title>
+        <Card.Title>Edit your Trip</Card.Title>
         <Card.Divider />
         <Card.Title>Title</Card.Title>
         <TextInput
           style={styles.input}
           onChangeText={onChangeTitle}
           value={title}
-          placeholder="title..."
+          placeholder={editedTrip.title}
         />
         <Card.Divider />
         <Card.Title>Image</Card.Title>
@@ -66,7 +70,7 @@ function TripCreator({ navigation: { navigate } }) {
           style={styles.input}
           onChangeText={onChangeDescription}
           value={description}
-          placeholder="Descripe your trip..."
+          placeholder={editedTrip.description}
         />
         <Card.Divider />
         <Card.Divider />
@@ -96,4 +100,4 @@ const styles = StyleSheet.create({
   buttonSubmit: {},
   buttonCancel: {},
 });
-export default observer(TripCreator);
+export default observer(TripEditor);
