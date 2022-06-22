@@ -18,6 +18,7 @@ function Profile() {
   if (profileStore.isLoading) return <Text>Loading</Text>;
   const user = userStore.user;
   const profile = profileStore.getProfileById(user._id);
+  // let numOfTrips = profileStore.getNumOfTrips(profile._id);
   return (
     <View style={{ backgroundColor: "white", height: "100%" }}>
       <View
@@ -48,7 +49,7 @@ function Profile() {
               fontWeight: "600",
             }}
           >
-            10
+            {profileStore.getNumOfTrips(profile._id)}
           </Text>
           <Text
             style={{
@@ -59,7 +60,7 @@ function Profile() {
               fontFamily: "Roboto",
             }}
           >
-            Trip
+            Trips
           </Text>
         </View>
       </View>

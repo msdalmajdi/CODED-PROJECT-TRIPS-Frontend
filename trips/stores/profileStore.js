@@ -37,6 +37,11 @@ class ProfileStore {
   getProfileById = (userId) => {
     return this.profiles.find((profile) => profile.user._id === userId);
   };
+  getNumOfTrips(profileId) {
+    const profile = this.profiles.find((profile) => profile._id === profileId);
+    const numTrips = profile.user.trips.length;
+    return numTrips;
+  }
 }
 
 const profileStore = new ProfileStore();
