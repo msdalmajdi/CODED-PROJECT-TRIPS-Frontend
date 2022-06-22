@@ -9,8 +9,8 @@ import userStore from "./../../stores/userStore";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { observer } from "mobx-react";
 import tripStore from "../../stores/tripStore";
-import { Button } from 'react-native';
-
+import { Button } from "react-native";
+import EditProfile from "../EditProfile";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -19,18 +19,36 @@ function Index() {
   return (
     <Navigator
       initialRouteName="List"
-      screenOptions={{ headerTitleAlign: "center", headerStyle:{backgroundColor: "#6FB6F6",},headerTitleStyle:{color:"white",   fontFamily: "Roboto",fontWeight:"bold"}, }}
+      screenOptions={{
+        headerTitleAlign: "center",
+        headerStyle: { backgroundColor: "#6FB6F6" },
+        headerTitleStyle: {
+          color: "white",
+          fontFamily: "Roboto",
+          fontWeight: "bold",
+        },
+      }}
     >
-          <Screen name="Explore" component={TripsList} />
-          <Screen
-            name="Trip-details"
-            options={({ route }) => {
-              return {
-                title: tripStore.getTripById(route.params._id).title,
-              }
-            }}
-            component={TripDetails}
-          />
+      <Screen name="Explore" component={TripsList} />
+      <Screen name="EditProfile" component={EditProfile} />
+
+      <Screen
+        name="Trip-details"
+        options={({ route }) => {
+          return {
+            title: tripStore.getTripById(route.params._id).title,
+          };
+        }}
+        component={TripDetails}
+      />
+      <>
+        <Screen
+          name="Signin"
+          component={SignInPage}
+          options={{ headerShown: false }}
+        />
+        {/* <Screen name="Signup" component={SignUpPage} options={{headerShown: false}}  /> */}
+      </>
     </Navigator>
   );
 }

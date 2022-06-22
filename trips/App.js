@@ -1,14 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import Index from './components/navigation/Index';
-import BottomTabNav from "./components/navigation/BottomTabNav"
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import BottomTabNav from "./components/Navigation/BottomTabNav";
 
 export default function App() {
   return (
     <NavigationContainer>
       <BottomTabNav />
-      </NavigationContainer>
+    </NavigationContainer>
   );
 }
 
