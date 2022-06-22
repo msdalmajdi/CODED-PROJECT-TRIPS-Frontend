@@ -66,5 +66,5 @@ class UserStore {
 
 const userStore = new UserStore();
 userStore.checkForToken();
-//userStore.getUsers();
+userStore.getUsers();
 export default userStore;

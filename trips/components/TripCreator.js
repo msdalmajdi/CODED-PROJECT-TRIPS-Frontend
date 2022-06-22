@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
+import * as ImagePicker from 'expo-image-picker';
+import * as FileSystem from 'expo-file-system';
+
 import {
   StyleSheet,
   Text,
@@ -20,8 +23,23 @@ function TripCreator({ navigation: { navigate } }) {
   const [title, onChangeTitle] = useState("");
   const [image, onChangeImage] = useState("");
   const [description, onChangeDescription] = useState("");
+  // let file
+  const handleUpload = async () => {
+  //   let result = await ImagePicker.launchImageLibraryAsync();
+  //   // onChangeImage(result.uri);
+  //   // console.log(image)
+  //   file = await FileSystem.uploadAsync('http://192.168.43.154:8095/api/trips/trip-image',result.uri);
+  //   // onChangeImage(file.body)
+  //   console.log(file.body)
+  //   onChangeImage(file.body)
+  //   onChangeImage(file.body)
+
+  //   // console.log(image)
+  }
+
 
   const handleSubmit = () => {
+
     const send = {
       title: title,
       description: description,
@@ -54,12 +72,13 @@ function TripCreator({ navigation: { navigate } }) {
         />
         <Card.Divider />
         <Card.Title>Image</Card.Title>
-        <TextInput
+        <Button color="blue" title="Upload" onPress={handleUpload} />
+        {/* <TextInput
           style={styles.input}
           onChangeText={onChangeImage}
           value={image}
           placeholder="URL..."
-        />
+        /> */}
         <Card.Divider />
         <Card.Title>Description</Card.Title>
         <TextInput
