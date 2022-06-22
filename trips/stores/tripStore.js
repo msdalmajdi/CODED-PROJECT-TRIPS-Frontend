@@ -30,6 +30,29 @@ class TripStore {
       console.log(error);
     }
   };
+
+  deleteTrip = async (tripId) => {
+    try {
+      const response = await instance.delete(
+        `/api/trips/delete/${tripId}`,
+        tripId
+      );
+
+      const filteredData = this.trips.filter((trip) => trip._id !== tripId);
+      this.trips = filteredData;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  updateTrip = async (tripId, editedTrip) => {
+    try {
+      await instance.put(`/api/trips/update/${tripId}`, editedTrip);
+      console.log("FINISHED updating");
+      this.fetchTrips();
+    } catch (error) {
+      console.log("Error cant update");
+    }
+  };
 }
 
 const tripStore = new TripStore();
