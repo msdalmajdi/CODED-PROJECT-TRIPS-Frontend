@@ -14,9 +14,9 @@ class UserStore {
       // console.log(newUser);
       const response = await instance.post("/signup", newUser);
       instance.defaults.headers.common.Authorization = `Bearer${response.data.token}`;
-      console.log(response.data.token);
+      // console.log(response.data.token);
       this.user = jwt_decode(response.data.token);
-      console.log(response.data);
+      // console.log(response.data);
       await SecureStore.setItemAsync("token", response.data.token);
       setShowError(false);
     } catch (error) {

@@ -7,6 +7,7 @@ import {
   Alert,
   TouchableOpacity,
 } from "react-native";
+import { Divider } from "react-native-elements/dist/divider/Divider";
 import React from "react";
 import profileStore from "../stores/profileStore";
 import { useNavigation } from "@react-navigation/native";
