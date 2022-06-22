@@ -62,23 +62,25 @@ export function SignInPage({navigation}) {
 
 
 
-<TouchableOpacity onPress={handleSignup} style={styles.signupBtn}>
-  <Text style={styles.signupText}>Signup</Text>
-</TouchableOpacity>
-
-<Text style ={styles.askText} >Already have an account?</Text>
-
 <TouchableOpacity onPress={handleSignin} style={styles.signinBtn}>
   <Text style={styles.signinText}>Signin</Text>
 </TouchableOpacity>
 
+<Text style ={styles.askText} >Don't have an account?</Text>
+
+<TouchableOpacity onPress={handleSignup} style={styles.signupBtn}>
+  <Text style={styles.signupText}>Signup</Text>
+</TouchableOpacity>
+
+
 {/* alert for the signup */}
 { showErrorup ? (
-Toast.show({
-  type: ALERT_TYPE.WARNING,
-  title: 'Invalid',
-  textBody: 'Username already exists, please enter a different username',
-}),setShowErrorup(false)
+         Dialog.show({
+          type: ALERT_TYPE.WARNING,
+          title: 'User Exists',
+          textBody: 'Username already exists, please choose another username.',
+          button: 'close',
+        }),setShowErrorup(false)
   ) : (
     <>
     </>
@@ -88,11 +90,13 @@ Toast.show({
 {/* alert for the signin */}
 
 { showErrorin ? (
- Toast.show({
-  type: ALERT_TYPE.WARNING,
-  title: 'Invalid',
-  textBody: 'Username and Password combination is incorrect, please try again',
-}),setShowErrorin(false)
+         Dialog.show({
+          type: ALERT_TYPE.WARNING,
+          title: 'Wrong Information',
+          textBody: 'Username and password combination is incorrect, please try again.',
+          button: 'close',
+        })
+,setShowErrorin(false)
   ) : (
     <>
     </>
@@ -153,7 +157,7 @@ const styles = StyleSheet.create({
       },
       signinBtn:
  {
-   width:"40%",
+   width:"80%",
    borderRadius:25,
    height:50,
    alignItems:"center",
@@ -180,7 +184,7 @@ const styles = StyleSheet.create({
  },
  signupBtn:
  {
-   width:"80%",
+   width:"40%",
    borderRadius:25,
    height:50,
    alignItems:"center",

@@ -1,19 +1,25 @@
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  Button,
-  Alert,
-  TouchableOpacity,
-  TextInput,
-} from "react-native";
 import React from "react";
 import profileStore from "../stores/profileStore";
+import userStore from "../stores/userStore";
+import { useState } from "react";
+import { StatusBar } from "expo-status-bar";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TextInput,
+  Alert,
+  Button,
+} from "react-native";
+import { Card, ListItem, Icon } from "react-native-elements";
+import { observer } from "mobx-react";
+import { Divider } from "react-native-elements/dist/divider/Divider";
 
-export default function EditProfile() {
-  const [bio, onChangeBio] = React.useState();
-  const [image, onChangeImage] = React.useState();
+function EditProfile() {
+  const [bio, onChangeBio] = useState();
+  const [image, onChangeImage] = useState();
+  const user = userStore.user;
   const profile = profileStore.getProfileById(user._id);
 
   // const handleChange = (event) => {
@@ -26,81 +32,56 @@ export default function EditProfile() {
     }
     profileStore.updateProfile(update, profile._id);
   };
+  const handleClear = () => {
+    onChangeBio("");
+    onChangeImage("");
+  };
   return (
-    <View style={{ backgroundColor: "white", height: "100%" }}>
-      <View
-        style={{
-          alignItems: "center",
-          marginLeft: 10,
-          marginTop: 20,
-        }}
-      >
-        <Text style={{ fontSize: 20, fontWeight: "bold" }}>Image</Text>
+    <View style={styles.container}>
+      <Card>
+        <Card.Title>Edit Your Profile</Card.Title>
+        <Card.Divider />
+        <Card.Title>Bio</Card.Title>
         <TextInput
-          style={{
-            width: 200,
-            height: 40,
-            margin: 12,
-            borderWidth: 1,
-            padding: 10,
-            textAlign: "center",
-          }}
-          underlineColorAndroid="transparent"
-          placeholder="Image uri"
-          name="image"
-          autoCapitalize="none"
-          onChangeText={{}}
+          style={styles.input}
+          onChangeText={onChangeBio}
+          value={bio}
+          placeholder="Enter your Bio"
         />
-        <Text
-          style={{
-            fontSize: 20,
-            color: "black",
-            paddingHorizontal: 10,
-            marginTop: 10,
-            fontWeight: "bold",
-            marginBottom: 10,
-          }}
-        >
-          edit bio
-        </Text>
+        <Card.Divider />
+        <Card.Title>Image</Card.Title>
         <TextInput
-          style={{
-            width: 200,
-            height: 40,
-            margin: 12,
-            borderWidth: 1,
-            padding: 10,
-            textAlign: "center",
-          }}
-          underlineColorAndroid="transparent"
-          placeholder="Enter your bio"
-          name="bio"
-          autoCapitalize="none"
-          onChangeText={{}}
+          style={styles.input}
+          onChangeText={onChangeImage}
+          value={image}
+          placeholder="Image URL"
         />
-        <TouchableOpacity
-          onPress={() => {
-            handleSubmit;
-          }}
-        >
-          <Text
+
+        <Card.Divider />
+        <View>
+          <Button title="Done" onPress={handleSubmit} />
+          <Divider />
+          <View
             style={{
-              backgroundColor: "blue",
-              height: 30,
-              fontSize: 20,
-              color: "white",
-              paddingHorizontal: 20,
-              marginTop: 20,
-              fontWeight: "bold",
-              marginBottom: 10,
-              borderWidth: 1,
-              textAlign: "center",
+              borderBottomColor: "white",
+              borderBottomWidth: 20,
             }}
-          >
-            Update
-          </Text>
-        </TouchableOpacity>
-      </View>
+          />
+          <Button color="#FF2400" title="Clear" onPress={handleClear} />
+        </View>
+      </Card>
     </View>
   );
 }
+const styles = StyleSheet.create({
+  container: {},
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+  buttonSubmit: {},
+  buttonCancel: {},
+});
+export default EditProfile;

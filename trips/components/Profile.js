@@ -16,9 +16,7 @@ function Profile() {
   const navigation = useNavigation();
   if (profileStore.isLoading) return <Text>Loading</Text>;
   const user = userStore.user;
-  //console.log(user);
   const profile = profileStore.getProfileById(user._id);
-  console.log(profile);
   return (
     <View style={{ backgroundColor: "white", height: "100%" }}>
       <View
@@ -44,7 +42,7 @@ function Profile() {
             style={{
               fontSize: 20,
               marginLeft: 20,
-              color: "blue",
+              color: "#199EF3",
               paddingHorizontal: 20,
               fontWeight: "600",
             }}
@@ -55,8 +53,9 @@ function Profile() {
             style={{
               fontSize: 20,
               paddingHorizontal: 10,
-              marginLeft: 20,
+              marginLeft: 24,
               color: "grey",
+              fontFamily: "Roboto",
             }}
           >
             Trip
@@ -70,7 +69,8 @@ function Profile() {
           paddingHorizontal: 10,
           marginTop: 10,
           fontWeight: "bold",
-          marginBottom: 10,
+          marginBottom: 5,
+          fontFamily: "Roboto",
         }}
       >
         {profile.user.username}
@@ -81,50 +81,49 @@ function Profile() {
           fontSize: 20,
           color: "black",
           paddingHorizontal: 10,
-          marginBottom: 20,
+          marginBottom: -10,
+          fontFamily: "Roboto",
         }}
       >
         {profile.bio}
       </Text>
       <TouchableOpacity
-        style={{
-          alignItems: "center",
-          padding: 10,
-        }}
+        style={styles.EditBtn}
         onPress={() => {
           navigation.navigate("EditProfile");
         }}
       >
-        <Text
-          style={{
-            backgroundColor: "blue",
-            height: 30,
-            fontSize: 20,
-            color: "white",
-            paddingHorizontal: 20,
-            marginTop: 20,
-            fontWeight: "bold",
-            marginBottom: 10,
-            borderWidth: 1,
-            textAlign: "center",
-          }}
-        >
-          Edit Profile
-        </Text>
+        <Text style={styles.EditText}>Edit Profile</Text>
       </TouchableOpacity>
     </View>
   );
 }
 export default observer(Profile);
 const styles = StyleSheet.create({
-  thumb: {
-    height: 260,
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
-    width: "100%",
+  EditBtn: {
+    marginLeft: 40,
+    width: "80%",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 40,
+    backgroundColor: "#6FB6F6",
+    fontFamily: "Roboto",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.0,
+
+    elevation: 24,
   },
-  bio: {
-    fontSize: 22,
+  EditText: {
+    color: "white",
     fontWeight: "bold",
+    alignSelf: "center",
+    fontFamily: "Roboto",
   },
 });
