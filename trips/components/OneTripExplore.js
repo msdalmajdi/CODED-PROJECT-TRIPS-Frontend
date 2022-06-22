@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   tripLogo: {
-    width: 370,
+    width: 340,
     height: 500,
   },
   tripTitle: {

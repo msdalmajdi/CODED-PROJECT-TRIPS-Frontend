@@ -11,6 +11,7 @@ import { observer } from "mobx-react";
 import tripStore from "../../stores/tripStore";
 import { Button } from "react-native";
 import EditProfile from "../EditProfile";
+import TripEditor from "../TripEditor";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -41,6 +42,7 @@ function Index() {
         }}
         component={TripDetails}
       />
+      <Screen name="Trip-update" component={TripEditor} />
       <>
         <Screen
           name="Signin"
