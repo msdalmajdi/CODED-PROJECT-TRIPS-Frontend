@@ -15,22 +15,27 @@ import {
 import { Card, ListItem, Icon } from "react-native-elements";
 import { observer } from "mobx-react";
 import { Divider } from "react-native-elements/dist/divider/Divider";
+import { useNavigation } from "@react-navigation/native";
 
 function EditProfile() {
   const [bio, onChangeBio] = useState();
   const [image, onChangeImage] = useState();
+  if (profileStore.isLoading) return <Text>Loading</Text>;
+  const navigation = useNavigation();
+
   const user = userStore.user;
   const profile = profileStore.getProfileById(user._id);
-
+  //console.log(profile);
   // const handleChange = (event) => {
   //   setProfile({ ...profile, [event.target.name]: event.target.value });
   // };
   const handleSubmit = () => {
     const update = { bio: bio, image: image };
-    if (image !== "") {
-      profile.image = image;
-    }
+    // if (image !== "") {
+    //   profile.image = image;
+    // }
     profileStore.updateProfile(update, profile._id);
+    navigation.navigate("Profile");
   };
   const handleClear = () => {
     onChangeBio("");
@@ -46,7 +51,7 @@ function EditProfile() {
           style={styles.input}
           onChangeText={onChangeBio}
           value={bio}
-          placeholder="Enter your Bio"
+          placeholder={profile.bio}
         />
         <Card.Divider />
         <Card.Title>Image</Card.Title>
@@ -54,7 +59,7 @@ function EditProfile() {
           style={styles.input}
           onChangeText={onChangeImage}
           value={image}
-          placeholder="Image URL"
+          placeholder={profile.image}
         />
 
         <Card.Divider />
@@ -84,4 +89,4 @@ const styles = StyleSheet.create({
   buttonSubmit: {},
   buttonCancel: {},
 });
-export default EditProfile;
+export default observer(EditProfile);
