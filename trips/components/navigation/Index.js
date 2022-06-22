@@ -12,6 +12,7 @@ import tripStore from "../../stores/tripStore";
 import { Button } from "react-native";
 import EditProfile from "../EditProfile";
 import TripEditor from "../TripEditor";
+import ProfileView from "../ProfileView";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -32,6 +33,7 @@ function Index() {
     >
       <Screen name="Explore" component={TripsList} />
       <Screen name="EditProfile" component={EditProfile} />
+      <Screen name="Profile" component={ProfileView} />
 
       <Screen
         name="Trip-details"

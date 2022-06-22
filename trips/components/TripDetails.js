@@ -6,17 +6,30 @@ import {
   ScrollView,
   SafeAreaView,
   StyleSheet,
+  TimePickerAndroid,
+  TouchableOpacity,
 } from "react-native";
 
 import { Card, ListItem, Icon, Button } from "react-native-elements";
 
 import { observer } from "mobx-react";
+import { useNavigation } from "@react-navigation/native";
 import tripStore from "../stores/tripStore";
 import user from "../stores/userStore";
 import { Divider } from "native-base";
-function TripDetails({ route, navigation: { navigate } }) {
-  const trip = route.params;
+import profile from './../profileData';
 
+
+
+function TripDetails({ route, navigation: { navigate } }) {
+const navigation = useNavigation();
+  const trip = route.params;
+  console.log(user.allUsers)
+  const userOriginal = user.allUsers.filter(user => user._id === trip.owner)
+  console.log(userOriginal[0].username)
+  const navigateToProfile = () => {
+    
+  }
   const DeleteButton = () => {
     if (user.user._id == trip.owner) {
       return (
@@ -48,12 +61,18 @@ function TripDetails({ route, navigation: { navigate } }) {
       <ScrollView>
         <View>
           <Card>
-            <Card.Title>
-              <Text style={styles.tripTitle}>{trip.title}</Text>
-            </Card.Title>
+              <TouchableOpacity style={styles.profileClickable} onPress={()=> navigation.navigate("Profile",trip.owner)}>
+              <View style={styles.profileClickable}>
+            <Image style={ styles.profileImage} source={{ uri: userOriginal[0].profile.image }} />
+              <Text style={styles.tripTitle}>{userOriginal[0].username}</Text>
+              </View>
+              </TouchableOpacity>
+
             <Card.Divider />
             <View style={styles.tripContainer}>
               <Image style={styles.tripImage} source={{ uri: trip.image }} />
+              <Card.Divider />
+              <Text style={styles.tripTitle}>{trip.title}</Text>
               <Card.Divider />
               <Text style={styles.tripDescription}>{trip.description}</Text>
               <Card.Divider />
@@ -87,6 +106,18 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: "row",
     alignItems: "center",
+  },
+  profileClickable:{
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start"
+  },
+  profileImage:{
+    height: 100,
+            width: 100,
+            borderRadius: 50,
+            marginBottom:10,
+            marginRight:10,
   },
 });
 export default observer(TripDetails);
