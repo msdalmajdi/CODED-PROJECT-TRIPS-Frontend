@@ -1,8 +1,5 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { observer } from "mobx-react";
-import tripStore from "../stores/tripStore";
-import { FlipInEasyX } from "react-native-reanimated";
 function OneTripExplore({ trip }) {
   return (
     <View style={styles.container}>
@@ -13,12 +10,11 @@ function OneTripExplore({ trip }) {
 }
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
-    // flexDirection: "row",
     alignItems: "center",
+    marginBottom: 10,
   },
   tripLogo: {
-    width: 340,
+    width: 390,
     height: 500,
   },
   tripTitle: {

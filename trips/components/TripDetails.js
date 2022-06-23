@@ -17,7 +17,7 @@ import { Divider } from "native-base";
 function TripDetails({ route, navigation: { navigate } }) {
   const trip = route.params;
 
-  const DeleteButton = () => {
+  const AuthorizedButtons = () => {
     if (user.user._id == trip.owner) {
       return (
         <View style={styles.tripButtons}>
@@ -47,19 +47,15 @@ function TripDetails({ route, navigation: { navigate } }) {
     <SafeAreaView>
       <ScrollView>
         <View>
-          <Card>
-            <Card.Title>
-              <Text style={styles.tripTitle}>{trip.title}</Text>
-            </Card.Title>
+          <Card.Divider />
+          <View style={styles.tripContainer}>
+            <Text style={styles.tripTitle}>{trip.title}</Text>
+            <Image style={styles.tripImage} source={{ uri: trip.image }} />
             <Card.Divider />
-            <View style={styles.tripContainer}>
-              <Image style={styles.tripImage} source={{ uri: trip.image }} />
-              <Card.Divider />
-              <Text style={styles.tripDescription}>{trip.description}</Text>
-              <Card.Divider />
-              <DeleteButton />
-            </View>
-          </Card>
+            <Text style={styles.tripDescription}>{trip.description}</Text>
+            <Card.Divider />
+            <AuthorizedButtons />
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -76,7 +72,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   tripImage: {
-    width: 340,
+    width: "100%",
     height: 500,
   },
   tripDescription: {
