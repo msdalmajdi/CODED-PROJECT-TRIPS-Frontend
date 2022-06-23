@@ -7,7 +7,8 @@ import { useNavigation } from "@react-navigation/native";
 
 function ProfileOneTrip({ trip }) {
   const navigation = useNavigation();
-  const TripDetails = tripStore.trips.find((triip) => triip._id == trip);
+  console.log(trip);
+  const TripDetails = tripStore.trips?.find((triip) => triip._id == trip._id);
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -17,7 +18,7 @@ function ProfileOneTrip({ trip }) {
       >
         <Image
           style={styles.tripLogo}
-          source={{ uri: TripDetails.image }}
+          source={{ uri: TripDetails?.image }}
         ></Image>
       </TouchableOpacity>
 

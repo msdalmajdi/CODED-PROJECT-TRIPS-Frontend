@@ -21,13 +21,15 @@ class TripStore {
     return this.trips.find((trip) => trip._id === id);
   };
 
-  createTrip = async (trip) => {
+  createTrip = async (trip, success, failure) => {
     try {
       const response = await instance.post("/api/trips/create", trip);
       this.trips.push(response.data);
+      success(true);
       profileStore.fetchProfile();
     } catch (error) {
       console.log(error);
+      failure(true);
     }
   };
 
@@ -45,13 +47,15 @@ class TripStore {
       console.log(error);
     }
   };
-  updateTrip = async (tripId, editedTrip) => {
+  updateTrip = async (tripId, editedTrip, success, failure) => {
     try {
       await instance.put(`/api/trips/update/${tripId}`, editedTrip);
-      console.log("FINISHED updating");
+
       this.fetchTrips();
+      success(true);
     } catch (error) {
       console.log("Error cant update");
+      failure(true);
     }
   };
 }
