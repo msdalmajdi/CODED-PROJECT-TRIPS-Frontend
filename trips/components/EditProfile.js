@@ -16,6 +16,11 @@ import { Card } from "react-native-elements";
 import { observer } from "mobx-react";
 import { Divider } from "react-native-elements/dist/divider/Divider";
 import { useNavigation } from "@react-navigation/native";
+import * as ImagePicker from 'expo-image-picker';
+import * as FileSystem from 'expo-file-system';
+
+let imageUri = null
+
 
 function EditProfile() {
   const [bio, onChangeBio] = useState();
@@ -24,11 +29,24 @@ function EditProfile() {
   const navigation = useNavigation();
   const user = userStore.user;
   const profile = profileStore.getProfileById(user._id);
+
+  const handleUpload = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync();
+    // onChangeImage(result.uri);
+    // console.log(image)
+    const file = await FileSystem.uploadAsync('http://192.168.150.146:8095/api/trips/trip-image',result.uri);
+    // console.log(file.body)
+    imageUri = file.body;
+    // console.log(imageUri)
+  }
+
+
   const handleSubmit = () => {
-    const update = { bio: bio, image: image };
+    const update = { bio: bio, image: imageUri };
     profileStore.updateProfile(update, profile._id);
-    navigation.navigate("Profile");
+    // navigation.navigate("Profile");
   };
+  
   const handleClear = () => {
     onChangeBio("");
     onChangeImage("");
@@ -47,12 +65,7 @@ function EditProfile() {
         />
         <Card.Divider />
         <Card.Title>Image</Card.Title>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeImage}
-          value={image}
-          placeholder={profile.image}
-        />
+          <Button title="Upload" onPress={handleUpload} />
         <Card.Divider />
         <View>
           <Button title="Done" onPress={handleSubmit} />

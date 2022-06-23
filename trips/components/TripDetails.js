@@ -15,9 +15,11 @@ import { Card, ListItem, Icon, Button } from "react-native-elements";
 import { observer } from "mobx-react";
 import { useNavigation } from "@react-navigation/native";
 import tripStore from "../stores/tripStore";
+import profileStore from "../stores/profileStore";
 import user from "../stores/userStore";
 import { Divider } from "native-base";
 import profile from './../profileData';
+import userStore from './../stores/userStore';
 
 
 
@@ -25,8 +27,9 @@ function TripDetails({ route, navigation: { navigate } }) {
 const navigation = useNavigation();
   const trip = route.params;
   console.log(user.allUsers)
-  const userOriginal = user.allUsers.filter(user => user._id === trip.owner)
-  console.log(userOriginal[0].username)
+  const userProfile = profileStore.getProfileById(trip.owner)
+  const userData = userStore.getUserById(trip.owner)
+  // console.log(userOriginal[0].username)
   const navigateToProfile = () => {
     
   }
@@ -63,8 +66,8 @@ const navigation = useNavigation();
           <Card>
               <TouchableOpacity style={styles.profileClickable} onPress={()=> navigation.navigate("Profile",trip.owner)}>
               <View style={styles.profileClickable}>
-            <Image style={ styles.profileImage} source={{ uri: userOriginal[0].profile.image }} />
-              <Text style={styles.tripTitle}>{userOriginal[0].username}</Text>
+            <Image style={ styles.profileImage} source={{ uri: userProfile.image }} />
+              <Text style={styles.tripTitle}>{userData.username}</Text>
               </View>
               </TouchableOpacity>
 

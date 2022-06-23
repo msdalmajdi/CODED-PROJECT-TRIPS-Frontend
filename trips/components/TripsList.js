@@ -14,15 +14,20 @@ import OneTripExplore from "./OneTripExplore";
 function TripsList({ navigation: { navigate } }) {
   const tripsList = tripStore.trips.map((trip) => {
     return (
-      <TouchableOpacity
+      <>
+      <TouchableOpacity key={trip._id}
         onPress={() => {
           navigate("Trip-details", trip);
         }}
       >
-        <Card containerStyle={{ backgroundColor: "#C6C9CC" }} key={trip._id}>
+        
           <OneTripExplore trip={trip} />
-        </Card>
+        
       </TouchableOpacity>
+      <View style={styles.border}>
+
+      </View>
+    </>
     );
   });
   return (
@@ -31,5 +36,11 @@ function TripsList({ navigation: { navigate } }) {
     </SafeAreaView>
   );
 }
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  border:{
+    borderBottomWidth:10,
+    borderBottomColor: "white",
+  }
+
+});
 export default observer(TripsList);
