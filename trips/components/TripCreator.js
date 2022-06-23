@@ -18,39 +18,39 @@ import tripStore from "../stores/tripStore";
 import { FlipInEasyX } from "react-native-reanimated";
 import { Divider } from "react-native-elements/dist/divider/Divider";
 
+let imageUri = null
+
+
 import user from "../stores/userStore";
 function TripCreator({ navigation: { navigate } }) {
   const [title, onChangeTitle] = useState("");
   const [image, onChangeImage] = useState("");
   const [description, onChangeDescription] = useState("");
-  // let file
-  const handleUpload = async () => {
-  //   let result = await ImagePicker.launchImageLibraryAsync();
-  //   // onChangeImage(result.uri);
-  //   // console.log(image)
-  //   file = await FileSystem.uploadAsync('http://192.168.43.154:8095/api/trips/trip-image',result.uri);
-  //   // onChangeImage(file.body)
-  //   console.log(file.body)
-  //   onChangeImage(file.body)
-  //   onChangeImage(file.body)
 
-  //   // console.log(image)
+  const handleUpload = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync();
+    // onChangeImage(result.uri);
+    // console.log(image)
+    const file = await FileSystem.uploadAsync('http://192.168.150.146:8095/api/trips/trip-image',result.uri);
+    // console.log(file.body)
+    imageUri = file.body;
+    // console.log(imageUri)
   }
 
 
   const handleSubmit = () => {
-
+    // console.log(imageUri)
     const send = {
       title: title,
       description: description,
       owner: user.user._id,
     };
-    if (image !== "") {
-      send.image = image;
+    if (imageUri !== "") {
+      send.image = imageUri;
     }
     tripStore.createTrip(send);
     handleClear();
-    navigate("Explore");
+    navigate("Home");
   };
 
   const handleClear = () => {
@@ -72,7 +72,7 @@ function TripCreator({ navigation: { navigate } }) {
         />
         <Card.Divider />
         <Card.Title>Image</Card.Title>
-        <Button color="blue" title="Upload" onPress={handleUpload} />
+        <Button color="#6FB6F6" title="Upload" onPress={handleUpload} />
         {/* <TextInput
           style={styles.input}
           onChangeText={onChangeImage}
@@ -90,7 +90,7 @@ function TripCreator({ navigation: { navigate } }) {
         <Card.Divider />
         <Card.Divider />
         <View>
-          <Button title="Submit" onPress={handleSubmit} />
+          <Button title="Submit" color="#6FB6F6" onPress={handleSubmit} />
           <Divider />
           <View
             style={{
@@ -98,7 +98,7 @@ function TripCreator({ navigation: { navigate } }) {
               borderBottomWidth: 20,
             }}
           />
-          <Button color="#FF2400" title="Clear" onPress={handleClear} />
+          <Button color="#C6C9CC" title="Clear" onPress={handleClear} />
         </View>
       </Card>
     </View>

@@ -14,6 +14,10 @@ import { observer } from "mobx-react";
 import tripStore from "../stores/tripStore";
 import { FlipInEasyX } from "react-native-reanimated";
 import { Divider } from "react-native-elements/dist/divider/Divider";
+import * as ImagePicker from 'expo-image-picker';
+import * as FileSystem from 'expo-file-system';
+
+let imageUri = null
 
 import user from "../stores/userStore";
 function TripEditor({ route, navigation: { navigate } }) {
@@ -23,14 +27,25 @@ function TripEditor({ route, navigation: { navigate } }) {
   const [image, onChangeImage] = useState(editedTrip.image);
   const [description, onChangeDescription] = useState(editedTrip.description);
 
+  const handleUpload = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync();
+    // onChangeImage(result.uri);
+    // console.log(image)
+    const file = await FileSystem.uploadAsync('http://192.168.150.146:8095/api/trips/trip-image',result.uri);
+    console.log(file.body)
+    imageUri = file.body;
+    console.log(imageUri)
+  }
+
+
   const handleSubmit = () => {
     const send = {
       title: title,
       description: description,
       owner: user.user._id,
     };
-    if (image !== "") {
-      send.image = image;
+    if (imageUri !== "") {
+      send.image = imageUri;
     }
     console.log(send);
     console.log(editedTrip._id);
@@ -58,12 +73,8 @@ function TripEditor({ route, navigation: { navigate } }) {
         />
         <Card.Divider />
         <Card.Title>Image</Card.Title>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeImage}
-          value={image}
-          placeholder="URL..."
-        />
+        <Button color="#6FB6F6" title="Upload" onPress={handleUpload} />
+
         <Card.Divider />
         <Card.Title>Description</Card.Title>
         <TextInput

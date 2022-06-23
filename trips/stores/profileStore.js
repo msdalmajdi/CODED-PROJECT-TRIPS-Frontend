@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import instance from "./instance";
+import userStore from "./userStore";
 
 class ProfileStore {
   constructor() {
@@ -27,6 +28,9 @@ class ProfileStore {
         this.profiles.find((profile) => profile._id === profileId),
         updatedProfile
       );
+      userStore.getUsers();
+      this.fetchProfile();
+
       // this.profiles = this.profiles.map((profile) =>
       //   profile._id === profileId ? res.data : profile
       // );

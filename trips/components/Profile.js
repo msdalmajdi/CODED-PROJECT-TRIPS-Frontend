@@ -17,10 +17,10 @@ import ProfileOneTrip from "./ProfileOneTrip";
 function Profile() {
   const navigation = useNavigation();
   if (profileStore.isLoading) return <Text>Loading</Text>;
-  const user = userStore.user;
-  const profile = profileStore.getProfileById(user._id);
+  let user = userStore.user;
+  let profile = profileStore.getProfileById(user._id);
   //console.log(profile);
-  const tripsList = profile.user.trips.map((trip) => (
+  let tripsList = profile.user.trips.map((trip) => (
     <ProfileOneTrip trip={trip} key={trip._id} />
   ));
   //console.log(tripsList);

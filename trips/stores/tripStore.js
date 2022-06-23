@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-
+import profileStore from "./profileStore";
 import instance from "./instance";
 class TripStore {
   trips = [];
@@ -24,8 +24,8 @@ class TripStore {
   createTrip = async (trip) => {
     try {
       const response = await instance.post("/api/trips/create", trip);
-
       this.trips.push(response.data);
+      profileStore.fetchProfile();
     } catch (error) {
       console.log(error);
     }
@@ -40,6 +40,7 @@ class TripStore {
 
       const filteredData = this.trips.filter((trip) => trip._id !== tripId);
       this.trips = filteredData;
+      profileStore.fetchProfile();
     } catch (error) {
       console.log(error);
     }
