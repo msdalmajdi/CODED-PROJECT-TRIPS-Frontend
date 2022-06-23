@@ -141,6 +141,7 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
+    borderColor: "#6FB6F6",
   },
   buttonSubmit: {},
   buttonCancel: {},

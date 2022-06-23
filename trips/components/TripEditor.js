@@ -113,9 +113,9 @@ function TripEditor({ route, navigation: { navigate } }) {
         {showSuccessCreate ? (
           (Dialog.show({
             type: ALERT_TYPE.SUCCESS,
-            title: "Trip Created",
-            textBody: "Thanks",
-            button: "close",
+            title: "Trip Edited",
+            textBody: "",
+            button: "Hide",
           }),
           finishCreation())
         ) : (
@@ -125,9 +125,9 @@ function TripEditor({ route, navigation: { navigate } }) {
         {showErrorCreate ? (
           (Dialog.show({
             type: ALERT_TYPE.WARNING,
-            title: "Wrong Information",
-            textBody: "Please Enter correct stuff",
-            button: "close",
+            title: "Editing Failed",
+            textBody: "Please fix your inputs",
+            button: "Hide",
           }),
           setShowErrorCreate(false))
         ) : (
@@ -143,6 +143,8 @@ const styles = StyleSheet.create({
     height: 40,
     margin: 12,
     borderWidth: 1,
+    borderColor: "#6FB6F6",
+
     padding: 10,
   },
   buttonSubmit: {},

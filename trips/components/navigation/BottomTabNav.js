@@ -10,7 +10,8 @@ import { Button, View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import TripCreator from "../TripCreator";
-import Profile from "../Profile";
+import ProfileNav from "./ProfileNav";
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -71,7 +72,7 @@ function BottomTabNav() {
           />
           <Tab.Screen
             name="Profile"
-            component={Profile}
+            component={ProfileNav}
             options={{
               headerRight: () => (
                 <TouchableOpacity
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginRight: 10,
-    backgroundColor: "#FF2400",
+    backgroundColor: "#C6C9CC",
     fontFamily: "Roboto",
     shadowColor: "#000",
     shadowOffset: {
@@ -129,6 +130,7 @@ const styles = StyleSheet.create({
 
     elevation: 24,
   },
+  
   signoutText: {
     color: "white",
     fontWeight: "bold",

@@ -73,6 +73,8 @@ function ProfileView({ route }) {
           paddingHorizontal: 10,
           marginTop: 10,
           fontWeight: "bold",
+          paddingLeft:50,
+
           marginBottom: 5,
           fontFamily: "Roboto",
         }}
@@ -85,6 +87,8 @@ function ProfileView({ route }) {
           fontSize: 20,
           color: "black",
           paddingHorizontal: 10,
+          paddingLeft:65,
+          
           marginBottom: -10,
           fontFamily: "Roboto",
         }}

@@ -39,6 +39,7 @@ function TripsList({ navigation: { navigate } }) {
 const styles = StyleSheet.create({
   border:{
     borderBottomWidth:10,
+    
     borderBottomColor: "white",
   }
 
