@@ -12,7 +12,7 @@ import {
   Alert,
   Button,
 } from "react-native";
-import { Card, ListItem, Icon } from "react-native-elements";
+import { Card } from "react-native-elements";
 import { observer } from "mobx-react";
 import { Divider } from "react-native-elements/dist/divider/Divider";
 import { useNavigation } from "@react-navigation/native";
@@ -22,18 +22,10 @@ function EditProfile() {
   const [image, onChangeImage] = useState();
   if (profileStore.isLoading) return <Text>Loading</Text>;
   const navigation = useNavigation();
-
   const user = userStore.user;
   const profile = profileStore.getProfileById(user._id);
-  //console.log(profile);
-  // const handleChange = (event) => {
-  //   setProfile({ ...profile, [event.target.name]: event.target.value });
-  // };
   const handleSubmit = () => {
     const update = { bio: bio, image: image };
-    // if (image !== "") {
-    //   profile.image = image;
-    // }
     profileStore.updateProfile(update, profile._id);
     navigation.navigate("Profile");
   };
@@ -61,7 +53,6 @@ function EditProfile() {
           value={image}
           placeholder={profile.image}
         />
-
         <Card.Divider />
         <View>
           <Button title="Done" onPress={handleSubmit} />
@@ -79,14 +70,11 @@ function EditProfile() {
   );
 }
 const styles = StyleSheet.create({
-  container: {},
   input: {
     height: 40,
     margin: 12,
     borderWidth: 1,
     padding: 10,
   },
-  buttonSubmit: {},
-  buttonCancel: {},
 });
 export default observer(EditProfile);
