@@ -18,7 +18,7 @@ function ProfileView({ route }) {
   const navigation = useNavigation();
   if (profileStore.isLoading) return <Text>Loading</Text>;
   const profile = profileStore.getProfileById(user);
-  const tripsList = profile.aluser.trips.map((trip) => (
+  const tripsList = profile.user.trips.map((trip) => (
     <ProfileOneTrip trip={trip} key={trip._id} />
   ));
   return (
