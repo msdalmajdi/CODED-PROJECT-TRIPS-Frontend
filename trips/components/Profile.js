@@ -1,24 +1,29 @@
+import { StatusBar } from "expo-status-bar";
 import {
   View,
   Text,
   Image,
   StyleSheet,
-  Button,
-  Alert,
+  SafeAreaView,
+  ScrollView,
   TouchableOpacity,
 } from "react-native";
-import { Divider } from "react-native-elements/dist/divider/Divider";
 import React from "react";
 import profileStore from "../stores/profileStore";
 import { useNavigation } from "@react-navigation/native";
 import userStore from "../stores/userStore";
 import { observer } from "mobx-react";
+import ProfileOneTrip from "./ProfileOneTrip";
 function Profile() {
   const navigation = useNavigation();
   if (profileStore.isLoading) return <Text>Loading</Text>;
   const user = userStore.user;
   const profile = profileStore.getProfileById(user._id);
-  // let numOfTrips = profileStore.getNumOfTrips(profile._id);
+  //console.log(profile);
+  const tripsList = profile.user.trips.map((trip) => (
+    <ProfileOneTrip trip={trip} key={trip._id} />
+  ));
+  //console.log(tripsList);
   return (
     <View style={{ backgroundColor: "white", height: "100%" }}>
       <View
@@ -97,6 +102,12 @@ function Profile() {
       >
         <Text style={styles.EditText}>Edit Profile</Text>
       </TouchableOpacity>
+      <View style={styles.border} />
+      <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.scrollView}>
+          <View style={styles.itemscontainer}>{tripsList}</View>
+        </ScrollView>
+      </SafeAreaView>
     </View>
   );
 }
@@ -127,5 +138,27 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     alignSelf: "center",
     fontFamily: "Roboto",
+  },
+  border: {
+    borderWidth: 0.5,
+    marginTop: 15,
+    borderColor: "gray",
+  },
+  container: {
+    flex: 1,
+    paddingTop: StatusBar.currentHeight,
+  },
+  scrollView: {
+    backgroundColor: "white",
+    marginHorizontal: 20,
+  },
+  text: {
+    fontSize: 42,
+    marginHorizontal: 50,
+  },
+
+  itemscontainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
 });
