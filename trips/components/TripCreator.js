@@ -72,7 +72,7 @@ function TripCreator({ navigation: { navigate } }) {
         />
         <Card.Divider />
         <Card.Title>Image</Card.Title>
-        <Button color="#6FB6F6" title="Upload" onPress={handleUpload} />
+        <Button color="#199EF3" title="Upload" onPress={handleUpload} />
         {/* <TextInput
           style={styles.input}
           onChangeText={onChangeImage}
@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
+    borderColor: '#6FB6F6', 
   },
   buttonSubmit: {},
   buttonCancel: {},

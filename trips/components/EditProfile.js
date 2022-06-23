@@ -44,7 +44,7 @@ function EditProfile() {
   const handleSubmit = () => {
     const update = { bio: bio, image: imageUri };
     profileStore.updateProfile(update, profile._id);
-    // navigation.navigate("Profile");
+    navigation.navigate("Profile");
   };
   
   const handleClear = () => {
@@ -65,10 +65,10 @@ function EditProfile() {
         />
         <Card.Divider />
         <Card.Title>Image</Card.Title>
-          <Button title="Upload" onPress={handleUpload} />
+          <Button title="Upload" color="#199EF3" onPress={handleUpload} />
         <Card.Divider />
         <View>
-          <Button title="Done" onPress={handleSubmit} />
+          <Button title="Done"  color="#6FB6F6" onPress={handleSubmit} />
           <Divider />
           <View
             style={{
@@ -76,7 +76,7 @@ function EditProfile() {
               borderBottomWidth: 20,
             }}
           />
-          <Button color="#FF2400" title="Clear" onPress={handleClear} />
+          <Button color="#C6C9CC" title="Clear" onPress={handleClear} />
         </View>
       </Card>
     </View>
@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
     height: 40,
     margin: 12,
     borderWidth: 1,
+    borderColor:"#6FB6F6",
     padding: 10,
   },
 });

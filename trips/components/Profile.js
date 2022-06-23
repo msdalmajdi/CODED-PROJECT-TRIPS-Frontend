@@ -74,9 +74,10 @@ function Profile() {
           fontSize: 20,
           color: "black",
           paddingHorizontal: 10,
-          marginTop: 10,
+          marginTop: 2,
           fontWeight: "bold",
           marginBottom: 5,
+          paddingLeft:50,
           fontFamily: "Roboto",
         }}
       >
@@ -89,6 +90,8 @@ function Profile() {
           color: "black",
           paddingHorizontal: 10,
           marginBottom: -10,
+          paddingLeft:65,
+
           fontFamily: "Roboto",
         }}
       >

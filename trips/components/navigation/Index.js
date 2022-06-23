@@ -32,9 +32,7 @@ function Index() {
       }}
     >
       <Screen name="Explore" component={TripsList} />
-      <Screen name="EditProfile" component={EditProfile} />
-      <Screen name="Profile" component={ProfileView} />
-
+      <Screen name="ProfileView" component={ProfileView} />
       <Screen
         name="Trip-details"
         options={({ route }) => {
@@ -45,14 +43,6 @@ function Index() {
         component={TripDetails}
       />
       <Screen name="Trip-update" component={TripEditor} />
-      <>
-        <Screen
-          name="Signin"
-          component={SignInPage}
-          options={{ headerShown: false }}
-        />
-        {/* <Screen name="Signup" component={SignUpPage} options={{headerShown: false}}  /> */}
-      </>
     </Navigator>
   );
 }

@@ -73,7 +73,7 @@ function TripEditor({ route, navigation: { navigate } }) {
         />
         <Card.Divider />
         <Card.Title>Image</Card.Title>
-        <Button color="#6FB6F6" title="Upload" onPress={handleUpload} />
+        <Button color="#199EF3" title="Upload" onPress={handleUpload} />
 
         <Card.Divider />
         <Card.Title>Description</Card.Title>
@@ -86,7 +86,7 @@ function TripEditor({ route, navigation: { navigate } }) {
         <Card.Divider />
         <Card.Divider />
         <View>
-          <Button title="Submit" onPress={handleSubmit} />
+          <Button title="Submit" color="#6FB6F6" onPress={handleSubmit} />
           <Divider />
           <View
             style={{
@@ -94,7 +94,7 @@ function TripEditor({ route, navigation: { navigate } }) {
               borderBottomWidth: 20,
             }}
           />
-          <Button color="#FF2400" title="Clear" onPress={handleClear} />
+          <Button color="#C6C9CC" title="Clear" onPress={handleClear} />
         </View>
       </Card>
     </View>
@@ -106,6 +106,8 @@ const styles = StyleSheet.create({
     height: 40,
     margin: 12,
     borderWidth: 1,
+    borderColor:"#6FB6F6",
+
     padding: 10,
   },
   buttonSubmit: {},
