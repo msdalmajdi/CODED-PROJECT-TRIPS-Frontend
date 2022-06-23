@@ -18,7 +18,7 @@ function ProfileView({ route }) {
   const navigation = useNavigation();
   if (profileStore.isLoading) return <Text>Loading</Text>;
   const profile = profileStore.getProfileById(user);
-  const tripsList = profile.aluser.trips.map((trip) => (
+  const tripsList = profile.user.trips.map((trip) => (
     <ProfileOneTrip trip={trip} key={trip._id} />
   ));
   return (
@@ -73,6 +73,8 @@ function ProfileView({ route }) {
           paddingHorizontal: 10,
           marginTop: 10,
           fontWeight: "bold",
+          paddingLeft:50,
+
           marginBottom: 5,
           fontFamily: "Roboto",
         }}
@@ -85,6 +87,8 @@ function ProfileView({ route }) {
           fontSize: 20,
           color: "black",
           paddingHorizontal: 10,
+          paddingLeft:65,
+          
           marginBottom: -10,
           fontFamily: "Roboto",
         }}

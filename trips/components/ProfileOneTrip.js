@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
     fontWeight: "bold",
     // marginHorizontal: 10,
+    
     marginTop: 10,
   },
 });

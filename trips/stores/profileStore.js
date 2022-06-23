@@ -28,7 +28,6 @@ class ProfileStore {
         this.profiles.find((profile) => profile._id === profileId),
         updatedProfile
       );
-      userStore.getUsers();
       this.fetchProfile();
 
       // this.profiles = this.profiles.map((profile) =>

@@ -39,14 +39,12 @@ const navigation = useNavigation();
         <View style={styles.tripButtons}>
           <Button
             title="Update"
-            style={{ marginHorizontal: 20 }}
             onPress={() => {
               navigate("Trip-update", trip._id);
             }}
           />
           <Button
             title="Delete"
-            style={{ marginHorizontal: 20 }}
             onPress={() => {
               tripStore.deleteTrip(trip._id);
 
@@ -64,7 +62,7 @@ const navigation = useNavigation();
       <ScrollView>
         <View>
           <Card>
-              <TouchableOpacity style={styles.profileClickable} onPress={()=> navigation.navigate("Profile",trip.owner)}>
+              <TouchableOpacity style={styles.profileClickable} onPress={()=> navigation.navigate("ProfileView",trip.owner)}>
               <View style={styles.profileClickable}>
             <Image style={ styles.profileImage} source={{ uri: userProfile.image }} />
               <Text style={styles.tripTitle}>{userData.username}</Text>
@@ -106,7 +104,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   tripButtons: {
-    padding: 10,
+    flex:1,
+    width:"100%",
+    justifyContent:"space-evenly",
     flexDirection: "row",
     alignItems: "center",
   },
@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
     height: 100,
             width: 100,
             borderRadius: 50,
+            
             marginBottom:10,
             marginRight:10,
   },
