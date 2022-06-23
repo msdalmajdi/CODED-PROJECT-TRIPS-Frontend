@@ -79,6 +79,7 @@ function Profile() {
           marginBottom: 5,
           paddingLeft:50,
           fontFamily: "Roboto",
+          
         }}
       >
         {profile.user.username}

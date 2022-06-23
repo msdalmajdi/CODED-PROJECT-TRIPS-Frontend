@@ -88,6 +88,7 @@ function ProfileView({ route }) {
           color: "black",
           paddingHorizontal: 10,
           paddingLeft:65,
+          
           marginBottom: -10,
           fontFamily: "Roboto",
         }}

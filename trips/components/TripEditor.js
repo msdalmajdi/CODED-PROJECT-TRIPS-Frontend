@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     borderColor:"#6FB6F6",
+    
     padding: 10,
   },
   buttonSubmit: {},

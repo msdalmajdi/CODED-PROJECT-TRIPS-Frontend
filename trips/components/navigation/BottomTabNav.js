@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
 
     elevation: 24,
   },
+  
   signoutText: {
     color: "white",
     fontWeight: "bold",

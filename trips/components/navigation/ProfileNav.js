@@ -28,6 +28,7 @@ function ProfileNav() {
       <Screen name="Profile" component={Profile} />
       <Screen name="EditProfile" component={EditProfile} />
     </Navigator>
+    
   );
 }
 export default observer(ProfileNav);

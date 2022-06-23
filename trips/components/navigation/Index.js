@@ -42,6 +42,7 @@ function Index() {
         }}
         component={TripDetails}
       />
+      
       <Screen name="Trip-update" component={TripEditor} />
     </Navigator>
   );

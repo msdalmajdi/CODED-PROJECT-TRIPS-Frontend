@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor:"#6FB6F6",
     padding: 10,
+    
   },
 });
 export default observer(EditProfile);
